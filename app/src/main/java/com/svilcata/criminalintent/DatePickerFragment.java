@@ -11,7 +11,6 @@ import android.view.View;
 /**
  * Created by Svilcata on 18-Apr-16.
  */
-//
 public class DatePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
