@@ -11,10 +11,12 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+    private Date mTime;
 
     public Crime() {
         mId = UUID.randomUUID();
         mDate = new Date();
+        mTime = new Date();
     }
 
     public UUID getId() {
@@ -45,4 +47,11 @@ public class Crime {
         mTitle = title;
     }
 
+    public void setTime(Date time) {
+        mTime = time;
+    }
+
+    public Date getTime() {
+        return mTime;
+    }
 }
