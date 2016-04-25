@@ -58,18 +58,25 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
 
-        mTimeButton = (Button)v.findViewById(R.id.crime_time);
+        mTimeButton = (Button) v.findViewById(R.id.crime_time);
         updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 TimePickerFragment dialog = TimePickerFragment.newInstance(mCrime.getTime());
-                dialog.setTargetFragment(CrimeFragment.this,REQUEST_TIME);
-                dialog.show(manager,DIALOG_TIME);
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
+                dialog.show(manager, DIALOG_TIME);
             }
         });
 
@@ -116,17 +123,18 @@ public class CrimeFragment extends Fragment {
 
         return v;
     }
+
     @Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data){
-        if(resultCode != Activity.RESULT_OK){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
             return;
         }
-        if(requestCode == REQUEST_DATE){
-            Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+        if (requestCode == REQUEST_DATE) {
+            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
-        }else if(requestCode == REQUEST_TIME){
-            Date date = (Date)data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+        } else if (requestCode == REQUEST_TIME) {
+            Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
             mCrime.setTime(date);
             updateTime();
         }
@@ -135,6 +143,7 @@ public class CrimeFragment extends Fragment {
     private void updateDate() {
         mDateButton.setText(mCrime.getDate().toString());
     }
+
     private void updateTime() {
         mTimeButton.setText(DateFormat.format("hh:mm:00 a", mCrime.getTime()));
     }
