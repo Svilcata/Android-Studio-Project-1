@@ -21,6 +21,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,6 +47,8 @@ public class CrimeFragment extends Fragment {
     private Button mTimeButton;
     private Button mReportButton;
     private Button mSuspectButton;
+    private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -136,7 +140,7 @@ public class CrimeFragment extends Fragment {
                         .setType("text/plain")
                         .setText(getCrimeReport())
                         .setSubject(getString(R.string.crime_report_subject))
-                        .setChooserTitle(getString(R.string.send_report))                               .startChooser();
+                        .setChooserTitle(getString(R.string.send_report)).startChooser();
             }
         });
 
@@ -157,6 +161,9 @@ public class CrimeFragment extends Fragment {
         if (packageManager.resolveActivity(pickContact, PackageManager.MATCH_DEFAULT_ONLY) == null) {
             mSuspectButton.setEnabled(false);
         }
+
+        mPhotoButton = (ImageButton) v.findViewById(R.id.crime_camera);
+        mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
 
         return v;
     }
